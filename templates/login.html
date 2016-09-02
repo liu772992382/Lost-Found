@@ -1,51 +1,46 @@
-{% extends "test_base.html" %}
-{% block title %}登录{% endblock %}
+{% extends "form_mobile_base.html" %}
+{% block nav %}
+<div class="navbar color-white theme-white no-border">
+    <div class="navbar-inner">
+      <div class="center sliding">登录</div>
+      <div class="right"></div>
+    </div>
+</div>
+{% endblock %}
 {% block content %}
-<style type="text/css">
-  .reg
-  {
-    margin-top:2%; 
-  }
-</style>
-  <form class="am form" method="post" action="" enctype="multipart/form-data">
-
-    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
-    <center>
-      <p>{{Warnings}}</p>
-    </center>
-    <div class="am-g">
-      <div class="am-u-sm-11 am-u-sm-centered">
-        <div class="am-input-group am-input-group-primary">
-          <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
-          <input type="text" class="am-form-field" placeholder="邮箱" required="" name="EMail" id="EMail"> 
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="am-g">
-      <div class="am-u-sm-11 am-u-sm-centered">
-        <div class="am-input-group am-input-group-primary">
-          <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
-          <input type="password" class="am-form-field" placeholder="密码" required="" name="PassWord" id="PassWord">
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="am-g">
-      <div class="am-u-sm-11 am-u-sm-centered">
-      <center>
-      <input  class="am-btn am-btn-primary am-btn-block" type="submit" value="登录"></input>  
-      </center>
-      </div></div>
-    <div class="am-g">
-      <div class="am-u-sm-11 am-u-sm-centered reg">
-      <center>
-      <a href="/found/register">
-      <input  class="am-btn am-btn-danger am-btn-block"value="注册"></input></a>
-<br>
-      <a href="https://openapi.yiban.cn/oauth/authorize?client_id=9b738aa2ee18145a&redirect_uri=http://f.yiban.cn/iapp31797&state=STATE&display=html">
-      <input  class="am-btn am-btn am-btn-block"value="易班登录"></input></a>
-      </center>
-      </div></div>
+<div class="content-block">
+  <form class="list-block" method="post" action="/found/login">
+    <ul class="white">
+      <li>
+        <div class="item-content">
+         <div class="item-media"><i class="fa fa-envelope i-blue"></i></div>
+         <div class="item-inner">
+           <div class="item-input">
+             <input type="text" id="Email" name="EMail" placeholder="请输入邮箱" required="required" />
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-media"><i class="fa fa-lock i-blue"></i></div>
+         <div class="item-inner">
+           <div class="item-input">
+             <input type="password"  placeholder="请输入密码" required="required" name="PassWord" id="PassWord">
+           </div>
+         </div>
+       </div>
+      </li>
+    </ul>
+    <p class="login">
+      <input type="submit" class="button button-big button-fill" value="登录"/>
+    </p>
   </form>
+  <div class="register"><a href="/found/register">还没有帐号?马上注册&rarr;</a></div>
+  <div class="other-login">
+    <p>易班登录</p>
+    <img src="/static/img/icon/yiban.png" onclick="window.location.href='https://openapi.yiban.cn/oauth/authorize?client_id=9b738aa2ee18145a&redirect_uri=http://f.yiban.cn/iapp31797&state=STATE&display=html'" />
+  </div>
+</div>
+
 {% endblock %}

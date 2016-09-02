@@ -7,6 +7,13 @@ $(document).ready(function() {
     $(this).css("width", "24px");
   });
 
+  //处理图片上方显示标题事件
+  $(".gallery-item").hover(function() {
+    $(".header-top").css("height", "40px");
+  }, function() {
+    $(".header-top").css("height", "0");
+  });
+
   //加载更多
   $(".load").click(function() {
     for (var i=0; i<8; i++) {

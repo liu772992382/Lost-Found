@@ -1,52 +1,63 @@
-{% extends "test_base.html" %}
+{% extends "form_mobile_base.html" %}
 {% block title %}注册{% endblock %}
-{% block content %}
-  <form class="am form" method="post" action="" enctype="multipart/form-data" data-am-validator>
-    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
-  {% if Warnings %}<p>{{Warnings}}</p>
-   {% endif %}
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-       <div class="am-input-group am-input-group-primary ">
-  <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
-  <input type="text" class="am-form-field" placeholder="你的真实姓名"required=""type="text" minlength="2" name="TrueName" id="TrueName">
+{% block nav %}
+<div class="navbar color-white theme-white no-border">
+    <div class="navbar-inner">
+        <div class="left"><a href="/found/login"><i class="fa fa-chevron-left"></i></a></div>
+      <div class="center sliding">注册</div>
+      <div class="right"></div>
+    </div>
 </div>
-      </div>
-    </div>
-    <br>
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-        <div class="am-input-group am-input-group-primary"><span class="am-input-group-label"><i class="am-icon-envelope am-icon-fw"></i></span> <input class="am-form-field"  placeholder="你的邮件地址" type="text" required="" id="EMail" name="EMail"></div>
-      </div>
-    </div>
-    <br>
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-        <div class="am-input-group am-input-group-primary">
-          <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
-          <input id="PassWord" name="PassWord" type="password" class="am-form-field" placeholder="请输入密码" required=""type="text">
+{% endblock %}
+{% block content %}
+<div class="content-block">
+  <form class="list-block" method="post" enctype="multipart/form-data" action="/found/register">
+    <ul class="white">
+      <li>
+        <div class="item-content">
+         <div class="item-media"><i class="fa fa-user i-blue"></i></div>
+         <div class="item-inner">
+           <div class="item-input">
+             <input type="text" placeholder="你的真实姓名"required=""type="text" minlength="2" name="TrueName" id="TrueName">
+           </div>
+         </div>
+       </div>
+     </li>
+     <li>
+       <li>
+         <div class="item-content">
+          <div class="item-media"><i class="fa fa-mortar-board i-blue"></i></div>
+          <div class="item-inner">
+            <div class="item-input">
+              <input id="StuNumber" name="StuNumber" placeholder="你的学号" type="text" required="required">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <br>
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-        <div class="am-input-group am-input-group-secondary"><span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span> <input class="am-form-field" placeholder="请再一次输入密码" type="password"required="" data-equal-to="#PassWord"></div>
-      </div>
-    </div>
-    <br>
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-        <div class="am-input-group am-input-group-secondary"><span class="am-input-group-label"><i class="am-icon-mortar-board am-icon-fw"></i></span> <input class="am-form-field" id="StuNumber" name="StuNumber" placeholder="你的学号" type="text"required=""></div>
-      </div>
-    </div>
-    <br>
-      <div class="am-g">
-      <div class="am-u-sm-12 am-u-sm-centered">
-      <center>
-      <a href="/found/register">
-      <input  class="am-btn am-btn-danger am-btn-block" type="submit" value="注册"></input></a>
-      </center>
-      </div></div>
+       </li>
+      <li>
+        <div class="item-content">
+         <div class="item-media"><i class="fa fa-envelope i-blue"></i></div>
+         <div class="item-inner">
+           <div class="item-input">
+             <input placeholder="你的邮件地址" type="text" required="" id="EMail" name="EMail"></div>
+           </div>
+         </div>
+      </li>
+        <li>
+        <div class="item-content">
+         <div class="item-media"><i class="fa fa-lock i-blue"></i></div>
+         <div class="item-inner">
+           <div class="item-input">
+             <input type="password"  placeholder="请输入密码" required="required" name="PassWord" id="PassWord">
+           </div>
+         </div>
+       </div>
+      </li>
+    </ul>
+    <p class="login">
+      <input type="submit" class="button button-big button-fill button" value="注册"/>
+    </p>
   </form>
+</div>
+
 {% endblock %}

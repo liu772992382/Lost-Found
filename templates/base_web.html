@@ -30,13 +30,13 @@
     {%  block switch_nav %}
     {%  endblock %}
 
-    <div class="nav-header-right fr">
+    <div class="nav-header-right">
       <div class="search-box">
         <form action="/found/search" method="get" style="display:inline-block;">
         <input type="text" class="search-input" placeholder="" name="keyword" />
         </form>
         <i class="iconfont search">&#xf000a;</i>
-        {% if Login==True %}
+        {% if Login==False %}
         <a href="/found/login" class="btn-login">登录</a>
         {% else %}
         <a href="/found/logout" class="btn-login">登出</a>

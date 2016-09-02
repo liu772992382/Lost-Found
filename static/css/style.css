@@ -205,9 +205,9 @@ header a {
   transition: all 0.5s;
 }
 
-.header-top:hover {
+/*.header-top:hover {
   height: 40px;
-}
+}*/
 
 .describe {
   position: absolute;
@@ -443,6 +443,7 @@ header a {
 
 .user-info {
   display: inline-block;
+  float: left;
   vertical-align: top;
   width: 120px;
   height: 400px;
@@ -468,6 +469,7 @@ header a {
 
 .found-info {
   display: inline-block;
+  /*float: left;*/
   vertical-align: top;
   width: 80%;
   margin-left: 10px;

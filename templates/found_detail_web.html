@@ -14,8 +14,8 @@
 <div class="content">
       <div class="main-content inner">
         <div class="user-info">
-          <img src="/static/img/default.png" id="headimg" />
-          <p>{{user_info.TrueName}}</p>
+          <img src="/static/img/headimg/yiban.jpg" id="headimg" />
+          <p>{{username}}</p>
         </div>
         <div class="found-info">
           <div class="detail-header">{{user.Type}}&nbsp;|&nbsp;{{user.Header}}</div>
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                   <td>图片描述:</td>
-                  <td><img src="/static/img/{{user.ImgPath}}" style="max-width:300px;max-height:300px;" /></td>
+                  <td><img src="/static/img/{{user.ImgPath}}" style="max-width:300px;max-height:300px;" id="img" /></td>
                 </tr>
                 <tr>
                   <td>{% if user.Type == "寻物" %}悬赏网薪{% else %}需要网薪{% endif %}:</td>

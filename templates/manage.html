@@ -1,83 +1,69 @@
-{% extends "test_base.html" %}
+{% extends "base_mobile.html" %}
 {% block title %}管理启事{% endblock %}
+
+{% block nav %}
+<div class="navbar color-white theme-white no-border">
+    <div class="navbar-inner">
+        <div class="left"><a href="/found/user"><i class="fa fa-chevron-left"></i></a></div>
+      <div class="center sliding">详情</div>
+      <div class="right"></div>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
-<style type="text/css">
-  .am-intro{
-    /*border:5px solid #ccc !important;*/
-    margin: 0 !important;
-    border-top: 5px solid #ccc !important;
-  }
-</style>
 
 {% if users.items %}
-{% for user in users.items%}
-  <div data-am-widget="intro"
-       class="am-intro am-cf am-intro-default"
-      style="margin: 5px;margin-top: 8px;border:5px;" >
-
-    <div class="am-g am-intro-bd" style="background-color: rgba(250,250,250,200);">
-        <div
-            class="am-intro-left am-u-sm-5"><img src="../../static/img/{{user.ImgPath}}.thumbnail"/></div>
-        <div
-            class="am-intro-right am-u-sm-7">
-
-<p style="color:    #68838B;margin-bottom: 0.2rem;font-size: 1.6rem;"><span class="am-icon-clock-o"></span>&nbsp类型&nbsp{{user.Type}}<br></span><span class="am-icon-clock-o" style="width: 16px;"></span>&nbsp时间&nbsp{{user.Time}}<br><span class="am-icon-map-marker"style="width: 16px;"></span>&nbsp地点&nbsp{{user.Place}}<br>
-    <span class="am-icon-phone" style="width: 16px;"></span>&nbsp联系方式&nbsp{{user.ContactWay}}</p>
-</div></br>
-  <div class="am-article-bd">
-<div class="am-u-sm-9 am-u-sm-offset-1"> <p style="margin:0 0 0.2rem;font-size: 1.6rem;"> {{user.Content}}</br></p>
-<p style="float:right;margin: 0;font-size: 10px;color: rgba(113, 168, 212, 0.91)">{{user.SubTime}}</p>
-</div>
-  </div>
-  </div>
-      <div class="am-intro-more-bottom">
-
-      {% if not user.Verify %}
-      <div class="am-disabled" >未通过审核 </div>
-      {% else %}
-      <div class="am-disabled">已通过审核 </div>
-      {% endif %}
-      {% if user.LostStatus %}
-        <a  href="/found/manage?id={{user.Id}}&type=1&page={{page}}">完成</a>
-        {% else %}已完成
-        {% endif %}
-        <a class="am-intro-more  " href="/found/manage?id={{user.Id}}&type=0&page={{page}}">&nbsp&nbsp删除</a>
+<div class="content-block-title">支持滑动操作</div>
+<div class="list-block media-list things white">
+  <ul>
+  {% for user in users.items %}
+  <li class="swipeout">
+    <a href="/found/detail/{{user.Id}}" class="item-link item-content swipeout-content">
+      <div class="item-media">
+        <img class="item-img" src="/static/img/{{user.ImgPath}}" />
       </div>
-  </div>
-  </div>
-{% endfor%}
-{% else %}
-<center>
-<div>
-</br>
-<h2><i  class="am-icon-btn am-warning am-icon-warning"></i>无提交记录!</h2>
-</div>
-</center>
-{% endif %}
-<ul class="am-pagination am-pagination-centered">
-{% if users.has_prev %}
-      <li>
-        <a href="/found/manage/{{users.prev_num}}" class="">&laquo</a>
-      </li>
-{% else %}
-      <li class="am-disabled">
-        <a href="/found/manage/{{users.prev_num}}" class="">&laquo</a>
-{% endif %}
-  {% for i in range(((users.total-1)//5+1)) %}
-  {% if i+1==page %}
-  <li class="am-active"><a href="/found/manage/{{i+1}}">{{i+1}}</a></li>
-  {% else %}
-  <li><a href="/found/manage/{{i+1}}">{{i+1}}</a></li>
-  {% endif %}
+      <div class="item-inner">
+        <div class="item-title-row">
+          <div class="item-title"><i class="fa fa-briefcase i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;物品信息&nbsp;&nbsp;&nbsp;{{user.Header}}</div>
+        </div>
+        <div class="item-subtitle"><i class="fa fa-clock-o i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;{% if user.Type == '招领' %}拾获{% else %}丢失{% endif %}时间&nbsp;&nbsp;&nbsp;{{user.Time}}</div>
+        <div class="item-subtitle"><i class="fa fa-map-marker i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if user.Type == '招领' %}拾获{% else %}丢失{% endif %}地点&nbsp;&nbsp;&nbsp;{{user.Place}}</div>
+        <div class="item-subtitle"><i class="fa fa-money i-blue"></i>&nbsp;&nbsp;&nbsp;悬赏网薪&nbsp;&nbsp;&nbsp;{{user.Reward}}</div>
+        <div class="item-subtitle"><i class="fa fa-phone i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;联系方式&nbsp;&nbsp;&nbsp;{{user.ContactWay}}</div>
+        <div class="item-text">{{user.Content}}</div>
+      </div>
+    </a>
+    <div class="swipeout-actions-right">
+      <a href="/found/manage/{{page}}?id={{user.Id}}&type=1" class="bg-green">完成</a>
+      <a href="/found/manage/{{page}}?id={{user.Id}}&type=0" class="bg-red">删除</a>
+    </div>
+  </li>
   {% endfor %}
-{% if users.has_next %}
-      <li>
-        <a href="/found/manage/{{users.next_num}}" class="">&raquo</a>
-      </li>
+  </ul>
+</div>
 {% else %}
-<li class="am-disabled">
-        <a href="/found/manage/{{users.next_num}}" class="">&raquo</a>
-      </li>
+<div class="content-block-title">您还没有发布任何信息~</div>
 {% endif %}
-</ul>
+{% endblock %}
+
+{% block bottomnav %}
+<div class="toolbar tabbar tabbar-labels">
+    <div class="toolbar-inner">
+      <!-- Toolbar links -->
+      <a href="/found/" class="tab-link">
+       <i class="fa fa-home"></i>
+       <span class="tabbar-label">信息中心</span>
+      </a>
+     <a href="#" data-popup=".popup-publish" class="tab-link open-popup publish-info">
+        <img src="/static/img/icon/plus_green.png" class="plus-center" />
+        <!-- <i class="fa fa-plus-square-o fa-4"></i> -->
+     </a>
+     <a href="/found/user" class="tab-link active">
+         <i class="fa fa-user"></i>
+         <!-- <img src="/static/img/icon/user.png" /> -->
+         <span class="tabbar-label">我</span>
+     </a>
+  </div>
+</div>
 {% endblock %}

@@ -1,31 +1,109 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}Flasky{% endblock %}
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Home</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Found</a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li><a href="/">Lost</a></li>
-            </ul>
-        </div>
+{% extends "base_mobile.html" %}
+{% block title %}我{% endblock %}
+{% block nav %}
+<div class="navbar color-white theme-white no-border">
+    <div class="navbar-inner">
+        <div class="left"></div>
+      <div class="center sliding">我的主页</div>
+      <div class="right"></div>
     </div>
 </div>
 {% endblock %}
- 
+
 {% block content %}
-<div class="container">
-  {% block page_content %}{% endblock %}
+<div class="list-block white" style="margin: 0 !important;">
+  <div class="list-group">
+    <ul>
+      <li class="item-content">
+        <div class="item-media">
+          <img class="" src="{{user_info['headimg']}}" style="width:50px;height:50px;border-radius:50%;" />
+        </div>
+        <div class="item-inner">
+          <div class="item-title">{{user_info.username}}</div>
+          <div class="item-subtitle">{{user_info.stunumber}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="list-group">
+    <ul>
+      <li class="list-group-title"></li>
+      <li>
+        <a href="/found/manage?ttype=寻物" class="item-link item-content">
+          <div class="item-inner">
+              <div class="item-title">发布的寻物</div>
+              <!-- <div class="item-after"><i class="fa fa-angle-right"></i></div> -->
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/found/manage?ttype=招领" class="item-link item-content">
+          <div class="item-inner">
+              <div class="item-title">发布的招领</div>
+              <!-- <div class="item-after"><i class="fa fa-angle-right"></i></div> -->
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="list-group">
+    <ul>
+      <li class="list-group-title"></li>
+      <li>
+        <a href="#" onclick="window.location.href='/found/feedback'" class="item-link item-content">
+          <div class="item-inner">
+              <div class="item-title">反馈</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% if user_info.type == 'yiban' %}
+  <div class="list-group">
+    <ul>
+      <li class="list-group-title"></li>
+      <li>
+        <a href="/found/money" class="item-link item-content">
+          <div class="item-inner">
+              <div class="item-title">网薪&nbsp;&nbsp;{{user_info.money}}</div>
+              <div class="item-after get-money">领网薪</div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-popup=".popup-yibanfriend" class="item-link open-popup item-content send-money">
+          <div class="item-inner">
+              <div class="item-title">赠送网薪</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+</div>
+<div class="logout">
+  <div onclick="window.location.href='/found/logout'" class="button button-fill button-big color-red">退出</div>
+</div>
+{% endblock %}
+{% include 'yibanfriend.html' %}
+
+{% block bottomnav %}
+<div class="toolbar tabbar tabbar-labels">
+    <div class="toolbar-inner">
+      <!-- Toolbar links -->
+      <a href="/found/" class="tab-link">
+       <i class="fa fa-home"></i>
+       <span class="tabbar-label">信息中心</span>
+      </a>
+     <a href="#" data-popup=".popup-publish" class="tab-link open-popup publish-info">
+        <img src="/static/img/icon/plus_green.png" class="plus-center" />
+        <!-- <i class="fa fa-plus-square-o fa-4"></i> -->
+     </a>
+     <a href="/found/user" class="tab-link active">
+         <i class="fa fa-user"></i>
+         <!-- <img src="/static/img/icon/user.png" /> -->
+         <span class="tabbar-label">我</span>
+     </a>
+  </div>
 </div>
 {% endblock %}

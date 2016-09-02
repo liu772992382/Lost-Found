@@ -1,118 +1,124 @@
-{% extends "test_base.html" %}
-{% block title %}提交启事{% endblock %}
-{% block content %}
 
-
-<form class="am form" method="post" action="" id="form1" enctype="multipart/form-data" data-am-validator>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
-  <div class="am-form-group">
-  <div class="am-form-group am-form-select data-am-selected am-g">
-      <div class="am-u-sm-6">
-      <select data-am-selected="{btnWidth: '100%', btnSize: 'sm', btnStyle: 'secondary'}" id="Type" name="Type">
-        <i class="dropdown icon"></i>
-        <option value="寻物">寻物</option>
-        <option value="招领">招领</option>
-        </select>
-        </div>
-      <div class="am-u-sm-6">
-      <select data-am-selected="{btnWidth: '95%', btnSize: 'sm', btnStyle: 'secondary'}" id="ThingsType" name="ThingsType">
-        <option value="0">证/卡</option>
-        <option value="1" >钱包</option>
-        <option value="2" >钥匙</option>
-        <option value="3" >手机</option>
-        <option value="4">其他</option>
-      </select>
-
+<div class="popup popup-publish">
+  <div class="navbar color-white theme-white no-border">
+      <div class="navbar-inner">
+        <div class="left"><a href="#" class="close-popup">取消</a></div>
+        <div class="center sliding">填写启事</div>
+        <div class="right"></div>
       </div>
-    </div>
-
-
-
-    <div class="am-g">
-    <div class="am-u-sm-12 am-u-sm-centered">
-  <div class="am-form-group">
-    <div class="am-input-group am-input-group-secondary">
-      <span class="am-input-group-label">时间</span>
-      <input type="text" class="am-form-field" id="Time" name="Time" max="15" required="">
-    </div>
   </div>
+  <div class="content-block">
+    <form class="list-block" method="post" enctype="multipart/form-data" action="/found/form">
+      <ul>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-briefcase i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">标题</div>
+             <div class="item-input">
+               <input type="text" id="Header" name="Header" placeholder="写下这次启事的标题" required="required" />
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-question-circle i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">方式</div>
+             <div class="item-input">
+               <select id="Type" name="Type">
+                   <option value="寻物">寻物</option>
+                   <option value="招领">招领</option>
+               </select>
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-sun-o i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">类型</div>
+             <div class="item-input">
+               <select id="ThingsType" name="ThingsType">
+                 <option value="0">证/卡</option>
+                 <option value="1" >钱包</option>
+                 <option value="2" >钥匙</option>
+                 <option value="3" >手机</option>
+                 <option value="4">其他</option>
+               </select>
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-clock-o i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">时间</div>
+             <div class="item-input">
+              <input type="text" id="Time" name="Time" required="required" placeholder="丢失或者拾获的时间">
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-map-marker i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">地点</div>
+             <div class="item-input">
+              <input type="text" id="Place" name="Place" required="required" placeholder="丢失或者拾获的地点">
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-phone i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">联系方式</div>
+             <div class="item-input">
+              <input type="text" id="ContactWay" name="ContactWay" required="required" placeholder="写下您的联系方式">
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-media"><i class="fa fa-money i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">网薪</div>
+             <div class="item-input">
+            <input type="text" id="Reward" name="Reward" {% if user_info.type == 'local' %}disabled="disabled" style="cursor:not-allowed !important;" placeholder="不是易班用户不能填写此项"{% else %} placeholder="悬赏或者需要的网薪(选填)"{% endif %}>
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-media"><i class="fa fa-camera i-blue"></i></div>
+           <div class="item-inner">
+             <div class="item-title label">照片</div>
+             <div class="item-input">
+              <input type="file" id="File" name="form_file">
+             </div>
+           </div>
+         </div>
+        </li>
+        <li>
+          <div class="item-content">
+           <div class="item-inner">
+             <div class="item-input" style="position:relative;">
+              <textarea name="Content" placeholder="写下您对物品的大致描述(选填)"></textarea>
+              <div style="position:absolute;display:inline-block;top:5px;;right:0;font-size:30px;color:#2196f3;"><i class="fa fa-microphone"></i></div>
+             </div>
+           </div>
+         </div>
+        </li>
+      </ul>
+      <input type="submit" class="button button-big button-fill" value="发布" style="background-color: #3a9425;" />
+    </form>
   </div>
-  </div>
-
-    <div class="am-g">
-    <div class="am-u-sm-12 am-u-sm-centered">
-  <div class="am-form-group">
-    <div class="am-input-group am-input-group-secondary">
-      <span class="am-input-group-label">地点</span>
-      <input type="text" class="am-form-field" id="Place" name="Place" required="">
-    </div>
-  </div>
-    </div></div>
-
-    <div class="am-g">
-    <div class="am-u-sm-12 am-u-sm-centered">
-  <form class="am form" method="post" action="" enctype="multipart/form-data">
-  <div class="am-form-group">
-    <div class="am-input-group am-input-group-secondary">
-      <span class="am-input-group-label">联系方式</span>
-      <input type="text" class="am-form-field" name="ContactWay" id="ContactWay" required="">
-    </div>
-  </div>
-  </div>
-  </div>
-<p></p>
-<center
-  <form class="am form" method="post" action="" enctype="multipart/form-data">
-  <div class="am-form-group am-input-group-secondary" style="{vertical-align: middle;}">
-      <label for="Content">物品描述</label></br>
-      <div class="am-g">
-      <div class="am-u-sm-12">
-      <textarea  class="txt" clos="60" maxlength="100" rows="4" col id="Content" name="Content" required></textarea>
-      </div></div>
-    </div>
-    <div class="am-form-group am-form-file">
-  <button type="button" class="am-btn am-btn-primary am-btn-sm">
-    <i class="am-icon-cloud-upload"></i> 选择图片（建议上传横向图片）</button>
-  <input id="doc-form-file" type="file" name="form_file" multiple>
 </div>
-<div id="file-list"></div>
-<script>
-  $(function() {
-    $('#doc-form-file').change(function() {
-      a=$(this).val().toLowerCase().split('.')
-      if(a[a.length-1]=='png'||a[a.length-1]=='jpeg'||a[a.length-1]=='jpg'||a[a.length-1]=='bmp'){
-        var fileNames = '';
-        $.each(this.files, function() {
-          fileNames += '<span class="am-badge">' + this.name + '</span> ';
-        });
-        $('#file-list').html(fileNames);
-      }
-      else{
-        this.outerHTML += '';
-        this.value ="";
-        var Warning='<span class="am-badge">请上传正确的图片格式(*.jpg,*.png,*.jpeg,*.bmp)</span>';
-        $('#file-list').html(Warning);
-      }
-    });
-  });
-</script>
-    </center>
-  </div>
-
-
-<p></p>
-<p></p>
-<center>
-<div>
- <input  class="am-btn am-btn-secondary am-round" type="submit" value="提交"></input></div></center>
- </div>
- </center>
-  </br>
-  <center>
-    <p>*需要经过管理员审核才能显示在首页
-  </center>
-</form>
-</body>
-</html>
-
-{% endblock %}

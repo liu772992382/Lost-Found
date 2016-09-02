@@ -2,9 +2,9 @@ window._bd_share_config={
       "common":{
         "bdSnsKey":{},"bdMini":"2","bdStyle":"0","bdSize":"24",
         "bdText": $("title").text(),
-        "bdDesc": $("#description").html(),
+        "bdDesc": $("#description").text(),
         "bdUrl": window.location.search,
-        "bdPic": "http://127.0.0.1:8888" + $("img").attr("src")
+        "bdPic": "http://127.0.0.1:8888" + $("#img").attr("src")
       },
       "share":{},
       "image":{

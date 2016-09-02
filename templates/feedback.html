@@ -1,0 +1,26 @@
+{% extends "form_mobile_base.html" %}
+{% block title %}我{% endblock %}
+{% block nav %}
+<div class="navbar color-white theme-white no-border">
+    <div class="navbar-inner">
+        <div class="left"><a href="#" onclick="window.location.href='/found/user'"><i class="fa fa-chevron-left"></i></a></div>
+      <div class="center sliding">发送反馈</div>
+      <div class="right"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="content-block">
+  <form class="list-block white" id="my-form" style="margin: 0 !important;">
+    <ul>
+      <li class="item-content">
+        <div class="item-inner">
+          <textarea name="Content" placeholder="写下您宝贵的建议~"></textarea>
+        </div>
+      </li>
+    </ul>
+  </form>
+  <input type="submit" class="button button-fill button-big color-green form-to-json" style="margin-top: 10px;" value="发送" />
+</div>
+{% endblock %}

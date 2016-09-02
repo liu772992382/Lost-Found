@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 #coding=utf8
-from flask import Flask, request, render_template,redirect,make_response,flash,session
-import flask
-import os
-import sys
+
 import flask.ext.whooshalchemy as whooshalchemy
 from flask.ext.sqlalchemy import SQLAlchemy
+from datetime import datetime
+from flask import Flask
 from config import Config
+import sys, os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -54,6 +54,17 @@ class UserData(db.Model):
     ContactWay = db.Column(db.String(100))
     Verify = db.Column(db.Boolean,default=False)
     SubTime=db.Column(db.String(30))
+
+
+class ThirdLoginUser(db.Model):
+    __tablename__ = 'ThirdLoginUser'
+
+    Id = db.Column(db.Integer,primary_key=True)
+    Type = db.Column(db.String(20))   # 第三方登录类型
+    UserId = db.Column(db.String(20)) # 第三方登录唯一ID
+    UserName = db.Column(db.String(20)) # 第三方登录用户名
+    AccessToken = db.Column(db.String(80))  # 第三方登录唯一凭证
+    TokenExpires = db.Column(db.String(40))  # 凭证过期时间
 
 
 class AdminUser(db.Model):
