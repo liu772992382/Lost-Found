@@ -1,0 +1,53 @@
+{% extends "test_base.html" %}
+{% block title %}个人中心{% endblock %}
+{% block content %}
+<style type="text/css">
+  .pic{
+    margin-top:8%;
+  }
+  .user{
+    margin-top:5%;
+  }
+</style>
+<header class="am-topbar am-topbar-fixed-top">
+  <h1 class="am-topbar-brand">
+    <a class="">个人中心</a>
+  </h1>
+<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+
+
+<div class="am-topbar-right">
+<a href="/found/login">
+      <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button></a>
+    </div>
+    <div class="am-topbar-right">
+    <a href="/found/register">
+      <button class="am-btn am-btn-danger am-topbar-btn am-btn-sm">注册</button></a>
+    </div>
+  
+  </div>
+  
+</header>
+
+
+
+ <div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
+    <a href="#top" title="">
+          <i class="am-gotop-icon am-icon-arrow-up"></i>
+    </a>
+  </div>
+<div class="am-g  hed">
+<div class="am-u-sm-3 ">
+      <img class="am-circle am-img-responsive am-img-thumbnail  pic" src="/static/img/default.png"  alt=""/>
+      </div>
+      <div class="am-u-sm-8  user"><br/>UserName  <i class="am-icon-edit am-icon-sm" href=""></i>
+      </div>
+</div>
+<ul class="am-list am-list-static am-list-border am-list-striped">
+  <li>性别 :</li>
+  <li>电话 :</li>
+</ul>
+
+{% endblock %}

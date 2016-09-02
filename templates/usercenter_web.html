@@ -1,0 +1,40 @@
+{% extends "base_web.html" %}
+{% block title %}个人中心{% endblock %}
+<style type="text/css">
+  .pic{
+    margin-top:8%;
+  }
+  .user{
+    margin-top:5%;
+  }
+</style>
+
+{% block tab %}
+   <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav">
+      <li ><a href="/found/">寻物</a></li>
+      <li><a href="/found/form">发布启事</a></li>
+     <li><a href="/found/manage">管理启事</a></li>
+     <li class="am-active"><a href="/found/usercenter">个人中心</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+
+ <div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
+    <a href="#top" title="">
+          <i class="am-gotop-icon am-icon-arrow-up"></i>
+    </a>
+  </div>
+<div class="am-g  hed">
+<div class="am-u-sm-3 ">
+      <img class="am-circle am-img-responsive am-img-thumbnail  pic" src="/static/img/default.png"  alt=""/>
+      </div>
+      <div class="am-u-sm-8  user"><br/>UserName  <i class="am-icon-edit am-icon-sm" href=""></i>
+      </div>
+</div>
+<ul class="am-list am-list-static am-list-border am-list-striped">
+  <li>性别 :</li>
+  <li>电话 :</li>
+</ul>
+
+{% endblock %}

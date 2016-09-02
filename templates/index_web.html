@@ -1,0 +1,49 @@
+{% extends "base_web.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block tab %}
+
+{% endblock %}
+{%  block switch_nav %}
+    <nav class="nav fl">
+      <ul class="head-nav">
+        <li class="nav-item {% if Type=='寻物' %}active{% endif %}"><a href="/found?type=寻物">寻物</a></li>
+        <li class="nav-item {% if Type=='招领' %}active{% endif %}"><a href="/found?type=招领">招领</a></li>
+        <li class="nav-item"><a href="/found/form">发布启事</a></li>
+        <li class="nav-item"><a href="/found/manage">管理启事</a></li>
+      </ul>
+    </nav>
+{%  endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="main-content inner">
+      <div class="lost">
+        {% for user in users.items %}
+        <div class="gallery-item">
+            <img src="../../static/img/{{user.ImgPath}}"  alt="远方 有一个地方 那里种有我们的梦想" onclick="window.location.href='/found/detail/{{user.Id}}'"/>
+            <div class="describe">
+              <p>{{user.Header}}</p>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% include 'pagination.html' %}
+  </div>
+</div>
+<div class="notice">
+  <img src="/static/img/notice.png" />
+  <div class="notice_l">
+    <div class="notice_l_c">
+      <p>公告</p>
+      <ul class="am-list am-list-static">
+        <li>登录之后才可以使用发布启示和管理启示.</li>
+        <li> 发布管理启示之后，需经过管理员审核才可以在首页显示.</li>
+        <li>当你发布的启示已经完成时，请将其标记为已完成.</li>
+        <li>如果你想修改已发布的启示，抱歉只能够删除后重新发布.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

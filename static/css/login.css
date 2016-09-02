@@ -1,0 +1,76 @@
+.login-content {
+  position: absolute;   /*这里设置postion为绝对定位,让这个块脱离文档流,从而使得height100%起作用 */
+  margin: 0;
+  width: 100%;
+  height: 100%;        /* 高度和宽度设置为百分比时,是采用继承的方式,继承上一个已设置了高度和宽度的父元素,直到找到body元素,但是body元素并不是默认高度满屏,所以不用绝对定位会出问题 */
+  background-image: url(../img/5.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.box {
+  margin: 30px auto 0;
+  width: 360px;
+  padding: 10px 0;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.box h3 {
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+input {
+  margin: 10px auto;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #e57373;
+}
+
+.submit {
+  margin-top: 20px;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+}
+
+.btn {
+  width: 90%;
+  border: 1px solid #f1f1f1;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.box .btn:hover {
+  background-color: #4cae4c;
+}
+
+.form-group:last-child a:hover {
+  color: #4cae4c;
+}
+
+.form-group:last-child {
+  margin: 20px 15px 0;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.form-group:last-child a {
+  text-decoration: none;
+  color: #aaa;
+}

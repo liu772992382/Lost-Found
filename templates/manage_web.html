@@ -1,0 +1,44 @@
+{% extends "base_web.html" %}
+{% block title %}管理启事{% endblock %}
+
+{% block tab %}
+
+{% endblock %}
+{%  block switch_nav %}
+    <nav class="nav fl">
+      <ul class="head-nav">
+        <li class="nav-item"><a href="/found?type=寻物">寻物</a></li>
+        <li class="nav-item"><a href="/found?type=招领">招领</a></li>
+        <li class="nav-item"><a href="/found/form">发布启事</a></li>
+        <li class="nav-item active"><a href="/found/manage">管理启事</a></li>
+      </ul>
+    </nav>
+{%  endblock %}
+{% block content %}
+<div class="content">
+    <div class="main-content inner">
+      <div class="lost">
+        {% for user in users.items %}
+        <div class="gallery-item">
+            <img src="../../static/img/{{user.ImgPath}}"  alt="远方 有一个地方 那里种有我们的梦想" onclick="window.location.href='/found/{{user.Id}}'"/>
+            <div class="header-top">{{user.Header}}</div>
+            <div class="describe">
+              {% if not user.Verify %}
+              <div class="fl">未通过审核</div>
+              {% else %}
+              <div class="fl">已通过审核</div>
+              {% endif %}
+              <div class="fr">
+                <a href="/found/manage?id={{user.Id}}&type=0&page={{page}}" class="delete">删除</a>
+                 {% if user.LostStatus %}
+                 <a  href="/found/manage?id={{user.Id}}&type=1&page={{page}}" class="pass">完成</a>
+                 {% else %}已完成{% endif %}
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% include 'pagination.html' %}
+  </div>
+</div>
+{% endblock %}

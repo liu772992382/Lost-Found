@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>失物招领-后台管理</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta property="qc:admins" content="7361354202611061556130767564" />
+  <meta name="keywords" content="重庆大学失物招领后台管理平台-易班技术部开发">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
+  <link rel="icon" type="image/jpg" src="/static/assets/i/favicon.jpg">
+<body>
+<header>
+  <div class="inner">
+    <div class="logo fl" style="font-size: 1.4em;">
+      <a href="javascript:void(0);">Finding</a>
+    </div>
+    <div class="admin-title">后台管理</div>
+  </div>
+</header>
+<div class="admin-content">
+    <div class="main-content inner">
+      <div class="admin-select">
+        <p>分类</p>
+        <div class="admin-no-verify" id="no-verify" onclick="window.location.href='/found/admin'">未审核</div>
+        <div class="admin-verify active" id="verify" onclick="window.location.href='/found/verified'">已审核</div>
+      </div>
+      <div class="verify-items">
+        {% if users %}
+        <div class="lost">
+          {% for user in users.items %}
+          <div class="gallery-item">
+              <img src="../../static/img/{{user.ImgPath}}"  alt="远方 有一个地方 那里种有我们的梦想" onclick="window.location.href='/found/{{user.Id}}'"/>
+              <div class="header-top">{{user.Header}}</div>
+              <div class="describe">
+                <div class="fl">已通过审核</div>
+                <div class="fr">
+                  <a href="/found/verified?id={{user.Id}}&type=0&page={{page}}" class="delete">删除</a>
+                   {% if user.LostStatus %}
+                   <a  href="/found/verified?id={{user.Id}}&type=1&page={{page}}" class="pass" title="当您已经完成了此寻物或者招领任务">完成</a>
+                   {% else %}已完成{% endif %}
+                </div>
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% include 'pagination.html' %}
+        {% else %}
+        无提交记录!
+        {% endif %}
+      </div>
+    </div>
+</div>
+</body>
+</html>

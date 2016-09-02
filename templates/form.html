@@ -1,0 +1,118 @@
+{% extends "test_base.html" %}
+{% block title %}提交启事{% endblock %}
+{% block content %}
+
+
+<form class="am form" method="post" action="" id="form1" enctype="multipart/form-data" data-am-validator>
+<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+  <div class="am-form-group">
+  <div class="am-form-group am-form-select data-am-selected am-g">
+      <div class="am-u-sm-6">
+      <select data-am-selected="{btnWidth: '100%', btnSize: 'sm', btnStyle: 'secondary'}" id="Type" name="Type">
+        <i class="dropdown icon"></i>
+        <option value="寻物">寻物</option>
+        <option value="招领">招领</option>
+        </select>
+        </div>
+      <div class="am-u-sm-6">
+      <select data-am-selected="{btnWidth: '95%', btnSize: 'sm', btnStyle: 'secondary'}" id="ThingsType" name="ThingsType">
+        <option value="0">证/卡</option>
+        <option value="1" >钱包</option>
+        <option value="2" >钥匙</option>
+        <option value="3" >手机</option>
+        <option value="4">其他</option>
+      </select>
+
+      </div>
+    </div>
+
+
+
+    <div class="am-g">
+    <div class="am-u-sm-12 am-u-sm-centered">
+  <div class="am-form-group">
+    <div class="am-input-group am-input-group-secondary">
+      <span class="am-input-group-label">时间</span>
+      <input type="text" class="am-form-field" id="Time" name="Time" max="15" required="">
+    </div>
+  </div>
+  </div>
+  </div>
+
+    <div class="am-g">
+    <div class="am-u-sm-12 am-u-sm-centered">
+  <div class="am-form-group">
+    <div class="am-input-group am-input-group-secondary">
+      <span class="am-input-group-label">地点</span>
+      <input type="text" class="am-form-field" id="Place" name="Place" required="">
+    </div>
+  </div>
+    </div></div>
+
+    <div class="am-g">
+    <div class="am-u-sm-12 am-u-sm-centered">
+  <form class="am form" method="post" action="" enctype="multipart/form-data">
+  <div class="am-form-group">
+    <div class="am-input-group am-input-group-secondary">
+      <span class="am-input-group-label">联系方式</span>
+      <input type="text" class="am-form-field" name="ContactWay" id="ContactWay" required="">
+    </div>
+  </div>
+  </div>
+  </div>
+<p></p>
+<center
+  <form class="am form" method="post" action="" enctype="multipart/form-data">
+  <div class="am-form-group am-input-group-secondary" style="{vertical-align: middle;}">
+      <label for="Content">物品描述</label></br>
+      <div class="am-g">
+      <div class="am-u-sm-12">
+      <textarea  class="txt" clos="60" maxlength="100" rows="4" col id="Content" name="Content" required></textarea>
+      </div></div>
+    </div>
+    <div class="am-form-group am-form-file">
+  <button type="button" class="am-btn am-btn-primary am-btn-sm">
+    <i class="am-icon-cloud-upload"></i> 选择图片（建议上传横向图片）</button>
+  <input id="doc-form-file" type="file" name="form_file" multiple>
+</div>
+<div id="file-list"></div>
+<script>
+  $(function() {
+    $('#doc-form-file').change(function() {
+      a=$(this).val().toLowerCase().split('.')
+      if(a[a.length-1]=='png'||a[a.length-1]=='jpeg'||a[a.length-1]=='jpg'||a[a.length-1]=='bmp'){
+        var fileNames = '';
+        $.each(this.files, function() {
+          fileNames += '<span class="am-badge">' + this.name + '</span> ';
+        });
+        $('#file-list').html(fileNames);
+      }
+      else{
+        this.outerHTML += '';
+        this.value ="";
+        var Warning='<span class="am-badge">请上传正确的图片格式(*.jpg,*.png,*.jpeg,*.bmp)</span>';
+        $('#file-list').html(Warning);
+      }
+    });
+  });
+</script>
+    </center>
+  </div>
+
+
+<p></p>
+<p></p>
+<center>
+<div>
+ <input  class="am-btn am-btn-secondary am-round" type="submit" value="提交"></input></div></center>
+ </div>
+ </center>
+  </br>
+  <center>
+    <p>*需要经过管理员审核才能显示在首页
+  </center>
+</form>
+</body>
+</html>
+
+{% endblock %}

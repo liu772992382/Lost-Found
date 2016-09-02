@@ -1,0 +1,95 @@
+{% extends "base_web.html" %}
+{% block title %}提交启事{% endblock %}
+
+{% block tab %}
+{% endblock %}
+{%  block switch_nav %}
+    <nav class="nav fl">
+      <ul class="head-nav">
+        <li class="nav-item"><a href="/found?type=寻物">寻物</a></li>
+        <li class="nav-item"><a href="/found?type=招领">招领</a></li>
+        <li class="nav-item active"><a href="/found/form">发布启事</a></li>
+        <li class="nav-item"><a href="/found/manage">管理启事</a></li>
+      </ul>
+    </nav>
+{%  endblock %}
+{% block content %}
+<div class="content">
+    <div class="main-content inner">
+        <form role="form" method="post" enctype="multipart/form-data">
+          <div class="publish-form-item">
+            <label for="Header">标题</label>
+            <input type="text" id="Header" name="Header" required="">
+          </div>
+          <div class="publish-form-item">
+            <label for="Type">方式</label>
+            <select id="Type" name="Type">
+                <option value="寻物">寻物</option>
+                <option value="招领">招领</option>
+            </select>
+          </div>
+          <div class="publish-form-item">
+             <label for="ThingsType">类型</label>
+             <select id="ThingsType" name="ThingsType">
+               <option value="0">证/卡</option>
+               <option value="1" >钱包</option>
+               <option value="2" >钥匙</option>
+               <option value="3" >手机</option>
+               <option value="4">其他</option>
+             </select>
+          </div>
+          <div class="publish-form-item">
+            <label for="Time">时间</label>
+            <input type="text" id="Time" name="Time" required="">
+          </div>
+          <div class="publish-form-item">
+            <label for="Place">地点</label>
+            <input type="text" id="Place" name="Place" required="">
+          </div>
+          <div class="publish-form-item">
+            <label for="ContactWay">联系方式</label>
+             <input type="text" name="ContactWay" id="ContactWay" required="">
+          </div>
+          <div class="publish-form-item">
+            <label for="Reward" id="RewardLabel">悬赏网薪</label>
+             <input type="text" name="Reward" id="Reward" required="">
+          </div>
+          <div class="publish-form-item">
+            <label for="Content">物品描述</label>
+            <textarea id="Content" name="Content" required></textarea>
+          </div>
+          <div class="publish-form-item">
+            <span>
+              <input id="File" type="file" name="form_file" multiple><img src="/static/img/upload.png" />添加图片
+            </span>
+          </div>
+          <div class="publish-form-item">
+            <button type="submit" class="btn btn-success">提交</button>
+          </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script>
+  $(function() {
+    $('#File').change(function() {
+      a=$(this).val().toLowerCase().split('.')
+      if(a[a.length-1]=='png'||a[a.length-1]=='jpeg'||a[a.length-1]=='jpg'||a[a.length-1]=='bmp'){
+      }
+      else{
+        this.outerHTML += '';
+        this.value ="";
+        alert('请上传正确的图片格式(*.jpg,*.png,*.jpeg,*.bmp)');
+      }
+    });
+  });
+</script>
+<script>
+  $("#Type").change(function() {
+    if ($(this).val() == "招领") {
+      $("#RewardLabel").html("需要网薪");
+    }
+  });
+</script>
+
+{% endblock %}

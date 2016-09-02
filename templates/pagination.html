@@ -1,0 +1,27 @@
+<ul class="pagination">
+  {% if users.has_prev %}
+  <li class="prev">
+  <a href="{{ url_for('index', page = users.prev_num) }}">&laquo;</a>
+  </li>
+  {% else %}
+  <li class="prev">
+  <a class="disabled" href="javascript:void(0);">&laquo;</a>
+  </li>
+  {% endif %}
+  {% for i in range(((users.total-1)//8+1)) %}
+  {% if i+1==page %}
+  <li><a class="active" href="/found/{{i+1}}">{{i+1}}</a></li>
+  {% else %}
+  <li><a href="/found/{{i+1}}">{{i+1}}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% if users.has_next %}
+  <li class="next">
+  <a href="{{ url_for('index', page = users.next_num) }}">&raquo;</a>
+  </li>
+  {% else %}
+  <li class="next">
+  <a class="disabled" href="javascript:void(0);">&raquo;</a>
+  </li>
+  {% endif %}
+</ul>

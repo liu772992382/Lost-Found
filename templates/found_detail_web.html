@@ -1,0 +1,80 @@
+{% extends "base_web.html" %}
+{% block title %}{{user.Type}}-{{user.Header}}{% endblock %}
+{%  block switch_nav %}
+    <nav class="nav fl">
+      <ul class="head-nav">
+        <li class="nav-item active"><a href="/found?type=寻物">寻物</a></li>
+        <li class="nav-item"><a href="/found?type=招领">招领</a></li>
+        <li class="nav-item"><a href="/found/form">发布启事</a></li>
+        <li class="nav-item"><a href="/found/manage">管理启事</a></li>
+      </ul>
+    </nav>
+{%  endblock %}
+{% block content %}
+<div class="content">
+      <div class="main-content inner">
+        <div class="user-info">
+          <img src="/static/img/default.png" id="headimg" />
+          <p>{{user_info.TrueName}}</p>
+        </div>
+        <div class="found-info">
+          <div class="detail-header">{{user.Type}}&nbsp;|&nbsp;{{user.Header}}</div>
+          <div class="detail-content">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>物品类型:</td>
+                  <td>{{user.ThingsType}}</td>
+                </tr>
+                <tr>
+                  <td>丢失时间:</td>
+                  <td>{{user.Time}}</td>
+                </tr>
+                <tr>
+                  <td>丢失地点:</td>
+                  <td>{{user.Place}}</td>
+                </tr>
+                <tr>
+                  <td>详细描述:</td>
+                  <td id="description">{{user.Content}}</td>
+                </tr>
+                <tr>
+                  <td>图片描述:</td>
+                  <td><img src="/static/img/{{user.ImgPath}}" style="max-width:300px;max-height:300px;" /></td>
+                </tr>
+                <tr>
+                  <td>{% if user.Type == "寻物" %}悬赏网薪{% else %}需要网薪{% endif %}:</td>
+                  <td>{{user.Reward}}</td>
+                </tr>
+                <tr>
+                  <td>联系方式:</td>
+                  <td>{{user.ContactWay}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="share">
+            <p>分享: </p>
+            <div class="bdsharebuttonbox">
+              <a href="#" class="bds_more" data-cmd="more"></a>
+              <a href="#" class="bds_qzone" data-cmd="qzone"></a>
+              <a href="#" class="bds_tsina" data-cmd="tsina"></a>
+              <a href="#" class="bds_tqq" data-cmd="tqq"></a>
+              <a href="#" class="bds_renren" data-cmd="renren"></a>
+              <a href="#" class="bds_weixin" data-cmd="weixin"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/js/share.js"></script>
+  <script type="text/javascript">
+    $("#headimg").mouseover(function() {
+      $(this).addClass("animated swing");
+    });
+    $("#headimg").mouseleave(function() {
+      $(this).removeClass("animated swing");
+    });
+  </script>
+{% endblock %}

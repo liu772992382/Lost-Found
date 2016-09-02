@@ -1,0 +1,65 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html>
+{%- block html %}
+  <head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta property="qc:admins" content="7361354202611061556130767564" />
+<meta name="keywords" content="重庆大学失物招领平台-易班技术部开发">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!-- <link rel="stylesheet" href="/static/css/animate.css"> -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+<link rel="icon" type="image/jpg" src="/static/assets/i/favicon.jpg">
+    {%- block head %}
+    <title>{% block title %}{% endblock title %}</title>
+
+    {%- endblock head %}
+  </head>
+  {% block tab -%}{%- endblock tab %}
+
+<header>
+  <div class="inner">
+    <div class="logo fl" style="font-size: 1.4em;">
+      <a href="/found">Finding</a>
+    </div>
+    {%  block switch_nav %}
+    {%  endblock %}
+
+    <div class="nav-header-right fr">
+      <div class="search-box">
+        <form action="/found/search" method="get" style="display:inline-block;">
+        <input type="text" class="search-input" placeholder="" name="keyword" />
+        </form>
+        <i class="iconfont search">&#xf000a;</i>
+        {% if Login==True %}
+        <a href="/found/login" class="btn-login">登录</a>
+        {% else %}
+        <a href="/found/logout" class="btn-login">登出</a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<body>
+
+  {% block body -%}
+  {% block navbar %}
+  {%- endblock navbar %}
+  {% block content -%}
+  {%- endblock content %}
+  {%- endblock body %}
+  {% include 'footer.html' %}
+</body>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/load.js"></script>
+{%- endblock html %}
+</html>
+{% endblock doc -%}

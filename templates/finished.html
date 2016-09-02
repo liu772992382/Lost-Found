@@ -1,0 +1,77 @@
+{% extends "test_base.html" %}
+{% block title %}已完成{% endblock %}
+{% block content %}
+<header class="am-topbar am-topbar-fixed-top">
+  <h1 class="am-topbar-brand">
+    <a class="">已完成</a>
+  </h1>
+<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+
+
+    <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
+<div class="am-input-group am-input-group-primary">
+  <span class="am-input-group-label"><i class="am-icon-search am-icon-fw"></i></span>
+  <input type="text" class="am-form-field" placeholder="search">
+</div>
+    </form>
+
+  
+  </div>
+</header>
+
+{% for user in users.items%}
+<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+  <div data-am-widget="intro"
+       class="am-intro am-cf am-intro-default"
+       >
+      <div class="am-intro-hd">
+        <h2 class="am-intro-title">{{user.Type}}- - -> {{user.Header}}</h2>
+      </div>
+    <div class="am-g am-intro-bd">
+        <div
+            class="am-intro-left am-u-sm-5"><img src="/static/img/{{user.ImgPath}}"   /></div>
+        <div
+            class="am-intro-right am-u-sm-7">
+            <span class="am-badge am-badge-success am-radius am-text-default">{{user.Time}}</span>
+       <span class="am-badge am-badge-success am-radius am-text-default">{{user.Place}}</span>
+<span class="am-badge am-badge-success am-radius am-text-default">{{user.THingsType}}</span></div></br>
+<div style="float:left;width:50%;margin-top:5px;">
+  <div>
+    <p class="am-article-lead" rows='4'>
+    联系方式:{{user.ContactWay}}</br>
+    {{user.Content}}
+    </p>
+  </div>
+  </div>
+  </div>
+{% endfor%}
+
+<ul class="am-pagination am-pagination-centered">
+{% if users.has_prev %}
+      <li>
+        <a href="/found/finished/{{users.prev_num}}" class="">&laquo</a>
+      </li>
+{% else %}
+      <li class="am-disabled">
+        <a href="/found/finished/{{users.prev_num}}" class="">&laquo</a>
+{% endif %}
+  {% for i in range(((users.total-1)//5+1)) %}
+  {% if i+1==page %}
+  <li class="am-active"><a href="/found/finished/{{i+1}}">{{i+1}}</a></li>
+  {% else %}
+  <li><a href="/found/finished/{{i+1}}">{{i+1}}</a></li>
+  {% endif %}
+  {% endfor %}
+{% if users.has_next %}
+      <li>
+        <a href="/found/finished/{{users.next_num}}" class="">&raquo</a>
+      </li>
+{% else %}
+<li class="am-disabled">
+        <a href="/found/finished/{{users.next_num}}" class="">&raquo</a>
+      </li>
+{% endif %}
+</ul>
+{% endblock %}
