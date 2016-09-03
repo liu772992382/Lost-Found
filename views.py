@@ -433,13 +433,18 @@ def logout():
 
 @app.route('/found/yiban',methods=['GET'])
 def yiban():
-	x=request.query_string.split('&')
-	x=x[0].split('=')
-	info=decrypt(x[1])
-	session['access_token'] = info['visit_oauth']['access_token']
-	r1 = requests.get('https://openapi.yiban.cn/user/me?access_token=' + info['visit_oauth']['access_token'])
-	session['user_info'] = r1.json()
-	session['userid'] = session['user_info']['info']['yb_userid']
+	try:
+		x=request.args.get('verify_request')
+		print x
+		info=decrypt(x)
+		print info
+		session['access_token'] = info['visit_oauth']['access_token']
+		r1 = requests.get('https://openapi.yiban.cn/user/me?access_token=' + info['visit_oauth']['access_token'])
+		session['user_info'] = r1.json()
+		session['userid'] = session['user_info']['info']['yb_userid']
+		return redirect('/found/me')
+	except:
+		'认证失败'
 	# session['userid']=info['visit_user']['userid']
 	# session['thirdLogin'] = True
 	# user = ThirdLoginUser.query.filter(ThirdLoginUser.Type=="yiban",
@@ -461,7 +466,6 @@ def yiban():
 	# 		db.session.add(user)
 	# 		db.session.commit()
 
-	return redirect('/found/me')
 
 #-----------------------------------------api--------------------------------
 @app.route("/found/school/award_wx", methods=["GET"])
