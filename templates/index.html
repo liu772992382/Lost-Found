@@ -41,7 +41,7 @@
 
       <div class="list-block media-list list-block-search searchbar-found">
         <ul>
-          {% for i in users.items %}
+          {% for i in users %}
           {% if i.Type == 1 and i.Report <= 5 %}
           <li>
             <div class="card facebook-card">
@@ -56,10 +56,10 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text">{{i.Content}}</p>
+                  <p class="item-text">
+                  联系方式:{{i.ContactWay}}
+                  <br/>{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -87,7 +87,7 @@
 
       <div class="list-block media-list list-block-search searchbar-found">
         <ul>
-           {% for i in users.items %}
+           {% for i in users %}
           {% if i.Type == 0 and i.Report <= 5 %}
           <li>
             <div class="card facebook-card">
@@ -102,10 +102,11 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text">{{i.Content}}</p>
+                  <p class="item-text">
+                  联系方式:{{i.ContactWay}}
+                  <br/>
+                  {{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -128,7 +129,7 @@
 {% endblock %}
 
 {% block script %}
-{% for i in users.items %}
+{% for i in users %}
 <script type="text/javascript">
 var myPhotoBrowserStandalone{{i.did}} = myApp.photoBrowser({
   photos : [

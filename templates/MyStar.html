@@ -3,7 +3,7 @@
 <div class="navbar">
   <div class="navbar-inner">
       <div class="left sliding">
-      <a href="#" class="link back">
+      <a href="#" onclick="window.location.href='/found/me'" class="link back">
         <i class="icon icon-back"></i>
         <span>返回</span>
       </a>
@@ -62,10 +62,10 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text item-title">{{i.Content}}</p>
+                  <p class="item-text item-title">
+                  联系方式:{{i.ContactWay}}
+                  <br/>{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -108,10 +108,10 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text item-title">{{i.Content}}</p>
+                  <p class="item-text item-title">
+                  联系方式:{{i.ContactWay}}
+                  <br/>{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -132,6 +132,7 @@
 
 
 {% endblock %}
+
 
 {% block script %}
 {% for i in infos %}

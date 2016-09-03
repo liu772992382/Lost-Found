@@ -170,8 +170,8 @@ def index(page):
 	# LoginVer = True if session.get('userid', '') else False
 	# _type = request.args.get("type", "寻物")
 
-	paginate = UserData.query.order_by(UserData.SubTime.desc()).paginate(page, 18, False)
-	for i in paginate.items:
+	paginate = UserData.query.order_by(UserData.SubTime.desc()).all()
+	for i in paginate:
 		try:
 			rpos = i.ImgPath.rfind('.')
 			i.thumbnail = i.ImgPath[:rpos] + '_thumbnail' + i.ImgPath[rpos:]
@@ -218,10 +218,11 @@ def user():
 	else:
 		error = True
 		user_info = User()
-	return render_template('Me.html', title=u'我的主页', user_info = user_info, me = True, error = error)
+	infos = db.session.query(UserData).all()
+	return render_template('Me.html', title=u'我的主页', user_info = user_info, me = True, error = error, infos = infos)
 
 
-@app.route('/found/myinfo',methods = ['GET','POST'])
+@app.route('/found/myinfo',methods = ['GET'])
 @login_required
 def myinfo():
 	if request.method == 'GET':
@@ -236,7 +237,7 @@ def myinfo():
 		return render_template('MyInfo.html', me = True, infos = infos, title = u'我发布的信息')
 
 
-@app.route('/found/mystar',methods = ['GET','POST'])
+@app.route('/found/mystar',methods = ['GET'])
 @login_required
 def mystar():
 	if request.method == 'GET':

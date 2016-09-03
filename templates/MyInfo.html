@@ -3,7 +3,7 @@
 <div class="navbar">
   <div class="navbar-inner">
       <div class="left sliding">
-      <a href="#" class="link back">
+      <a href="#" onclick="window.location.href='/found/me'" class="link back">
         <i class="icon icon-back"></i>
         <span>返回</span>
       </a>
@@ -13,6 +13,10 @@
 </div>
   <!-- <div class="right"></div> -->
 {% endblock %}
+
+
+
+
 {% block search %}
 <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
     <div class="searchbar-input">
@@ -24,9 +28,8 @@
   <div class="searchbar-overlay"></div>
 
 {% endblock %}
+
 {% block content %}
-
-
 <div class="buttons-row">
   <!-- 关联到第一个tab, 默认激活 -->
   <a href="#tab1" class="tab-link active button">招领</a>
@@ -62,10 +65,10 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text item-title">{{i.Content}}</p>
+                  <p class="item-text item-title">
+                  联系方式:{{i.ContactWay}}
+                  <br/>{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -108,10 +111,10 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
-                        <br/>
-                        联系方式:{{i.ContactWay}}
                     </p>
-                  <p class="item-text item-title">{{i.Content}}</p>
+                  <p class="item-text item-title">
+                  联系方式:{{i.ContactWay}}
+                  <br/>{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
                       <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
 
@@ -129,9 +132,8 @@
 </div>
 </div>
 
-
-
 {% endblock %}
+
 
 {% block script %}
 {% for i in infos %}
