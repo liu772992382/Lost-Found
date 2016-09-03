@@ -10,7 +10,7 @@
 {% block search %}
 <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
     <div class="searchbar-input">
-      <input type="search" placeholder="用户名查找"><a href="#" class="searchbar-clear"></a>
+      <input type="search" placeholder="内容查找"><a href="#" class="searchbar-clear"></a>
     </div><a href="#" class="searchbar-cancel">Cancel</a>
   </form>
 
@@ -102,6 +102,8 @@
                         地点:{{i.Place}}
                         <br/>
                         时间:{{i.Time}}
+                        <br/>
+                        联系方式:{{i.ContactWay}}
                     </p>
                   <p class="item-text">{{i.Content}}</p>
                   <a href="#" id="{{i.did}}image">
