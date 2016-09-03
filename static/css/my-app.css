@@ -1,0 +1,90 @@
+i.n-icon{
+  padding-top: 4px;
+  font-size: 23px;
+}
+
+.facebook-card .card-content img {
+    padding: 2px;
+}
+
+.lazy-loaded.lazy-fadeIn {
+    -webkit-animation: lazyFadeIn 600ms;
+    animation: lazyFadeIn 600ms;
+}
+
+img.tkimg{
+  max-height: 200px;
+} 
+
+.card{
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.content-block{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card.p{
+  margin-left: 5px;
+}
+
+.content-block{
+  margin-top: 5px;
+}
+
+.buttons-row{
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card-footer a.active{
+  color: orange !important;
+}
+
+.list-block{
+  margin-top: 10px;
+}
+
+.page-content{
+  padding-bottom: 44px;
+}
+
+.demo-card-header-pic .card-header {
+  height: 40vw;
+  background-size: cover;
+  background-position: center;
+}
+.facebook-card .card-header {
+  display: block;
+  padding: 10px;
+}
+.facebook-card .facebook-avatar {
+  float: left;
+}
+.facebook-card .facebook-name {
+  margin-left: 44px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.facebook-card .facebook-date {
+  margin-left: 44px;
+  font-size: 13px;
+  color: #8e8e93;
+}
+.facebook-card .card-footer {
+  background: #fafafa;
+}
+.facebook-card .card-footer a {
+  color: #81848b;
+  font-weight: 500;
+}
+.facebook-card .card-content img {
+  display: block;
+}
+.facebook-card .card-content-inner {
+  padding: 15px 10px;
+}

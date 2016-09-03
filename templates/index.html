@@ -1,132 +1,142 @@
-{% extends "base_mobile.html" %}
-{% block title %}{% endblock %}
+{% extends "base.html" %}
+{% block nav%}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="center sliding">信息中心</div>
+  </div>
+</div>
+  <!-- <div class="right"></div> -->
+{% endblock %}
+{% block search %}
+<form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+    <div class="searchbar-input">
+      <input type="search" placeholder="用户名查找"><a href="#" class="searchbar-clear"></a>
+    </div><a href="#" class="searchbar-cancel">Cancel</a>
+  </form>
+
+  <!-- Search bar overlay -->
+  <div class="searchbar-overlay"></div>
+
+{% endblock %}
 {% block content %}
 
-<a href="#" class="open-popup link floating-button color-blue" data-popup=".popup-search">
-  <i class="fa fa-search"></i>
-</a>
 
-<div class="content-block">
-  <p class="buttons-row">
-    {% if Type=='招领' %}
-    <a href="/found?type=寻物" class="button">寻物</a>
-    <a href="/found?type=招领" class="button active">招领</a>
-    {% else %}
-    <a href="/found?type=寻物" class="button active">寻物</a>
-    <a href="/found?type=招领" class="button">招领</a>
-    {% endif %}
- </p>
+<div class="buttons-row">
+  <!-- 关联到第一个tab, 默认激活 -->
+  <a href="#tab1" class="tab-link active button">招领</a>
+  <!-- 关联到第二个tab -->
+  <a href="#tab2" class="tab-link button">寻物</a>
 </div>
-{% if users.items %}
-<!-- <div class="content-block"> -->
-<div class="list-block media-list things white">
-  <ul>
-  {% for user in users.items %}
-  <li class="swipeout">
-    <div class="swipeout-content">
-    <a href="#" class="item-link item-content">
-      <div class="item-media">
-        <img class="item-img" src="/static/img/{{user.ImgPath}}" />
+
+<div class="tabs">
+  <!-- Tab 1, 默认激活 -->
+  <div id="tab1" class="tab active">
+    <div class="content-block">
+      <!-- This block will be displayed if nothing found -->
+      <div class="content-block searchbar-not-found">
+        <div class="content-block-inner">Nothing found</div>
       </div>
-      <div class="item-inner">
-        <div class="item-title-row">
-          <div class="item-title"><i class="fa fa-briefcase i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;物品信息&nbsp;&nbsp;&nbsp;{{user.Header}}</div>
-        </div>
-        <div class="item-subtitle"><i class="fa fa-clock-o i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;{% if user.Type == '招领' %}拾获{% else %}丢失{% endif %}时间&nbsp;&nbsp;&nbsp;{{user.Time}}</div>
-        <div class="item-subtitle"><i class="fa fa-map-marker i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if user.Type == '招领' %}拾获{% else %}丢失{% endif %}地点&nbsp;&nbsp;&nbsp;{{user.Place}}</div>
-        <div class="item-subtitle"><i class="fa fa-money i-blue"></i>&nbsp;&nbsp;&nbsp;悬赏网薪&nbsp;&nbsp;&nbsp;{{user.Reward}}</div>
-        <div class="item-subtitle"><i class="fa fa-phone i-blue"></i>&nbsp;&nbsp;&nbsp;&nbsp;联系方式&nbsp;&nbsp;&nbsp;{{user.ContactWay}}</div>
-        <div class="item-text">{{user.Content}}</div>
+
+      <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
+
+      <div class="list-block media-list list-block-search searchbar-found">
+        <ul>
+          {% for i in users.items %}
+          {% if i.Type == 1 and i.Report <= 5 %}
+          <li>
+            <div class="card facebook-card">
+              <div class="card-header">
+                <div class="facebook-avatar"><img  src="{{i.UserImg}}" width="34" height="34" onerror="this.src='../static/img/icon/heart.png'"></div>
+                <div class="facebook-name item-title">{{i.UserNick}}</div>
+                <div class="facebook-date">{{i.SubTime}}</div>
+              </div>
+              <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="item-text">
+                        地点:{{i.Place}}
+                        <br/>
+                        时间:{{i.Time}}
+                        <br/>
+                        联系方式:{{i.ContactWay}}
+                    </p>
+                  <p class="item-text">{{i.Content}}</p>
+                  <a href="#" id="{{i.did}}image">
+                      <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
+
+                  </a>
+                </div>
+              </div>
+              <div class="card-footer"><a onclick="star({{i.did}})"  class="link {% if i.star %} active {% endif %}">收藏</a><a onclick="report({{i.did}})" class="link">举报({{i.Report}})</a></div>
+            </div>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
       </div>
-    </a>
-  </div>
-    <div class="swipeout-actions-right">
-      <a href="#" class="bg-green ac-one">分享</a>
     </div>
-  </li>
-  {% endfor %}
-</ul>
-<!-- </div> -->
+
+  </div>
+  <!-- Tab 2 -->
+  <div id="tab2" class="tab">
+    <div class="content-block">
+      <div class="content-block searchbar-not-found">
+        <div class="content-block-inner">Nothing found</div>
+      </div>
+
+      <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
+
+      <div class="list-block media-list list-block-search searchbar-found">
+        <ul>
+           {% for i in users.items %}
+          {% if i.Type == 0 and i.Report <= 5 %}
+          <li>
+            <div class="card facebook-card">
+              <div class="card-header">
+                <div class="facebook-avatar"><img  src="{{i.UserImg}}" width="34" height="34" onerror="this.src='../static/img/icon/heart.png'"></div>
+                <div class="facebook-name item-title">{{i.UserNick}}</div>
+                <div class="facebook-date">{{i.SubTime}}</div>
+              </div>
+              <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="item-text">
+                        地点:{{i.Place}}
+                        <br/>
+                        时间:{{i.Time}}
+                    </p>
+                  <p class="item-text">{{i.Content}}</p>
+                  <a href="#" id="{{i.did}}image">
+                      <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
+
+                  </a>
+                </div>
+              </div>
+              <div class="card-footer"><a onclick="star({{i.did}})"  class="link {% if i.star %} active {% endif %}">收藏</a><a onclick="report({{i.did}})" class="link">举报({{i.Report}})</a></div>
+            </div>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+  </div>
 </div>
-{% else %}
-<div class="content-block-title">还没有人发布任何信息~</div>
-{% endif %}
+</div>
+
+
+
 {% endblock %}
 
-{% block bottomnav %}
-<div class="toolbar tabbar tabbar-labels">
-    <div class="toolbar-inner">
-      <!-- Toolbar links -->
-      <a href="/found/" class="tab-link active">
-       <i class="fa fa-home"></i>
-       <span class="tabbar-label">信息中心</span>
-      </a>
-     <a href="#" data-popup=".popup-publish" class="tab-link open-popup publish-info">
-        <img src="/static/img/icon/plus_green.png" class="plus-center" />
-        <!-- <i class="fa fa-plus-square-o fa-4"></i> -->
-     </a>
-     <a href="/found/user" class="tab-link">
-         <i class="fa fa-user"></i>
-         <!-- <img src="/static/img/icon/user.png" /> -->
-         <span class="tabbar-label">我</span>
-     </a>
-  </div>
-</div>
+{% block script %}
+{% for i in users.items %}
+<script type="text/javascript">
+var myPhotoBrowserStandalone{{i.did}} = myApp.photoBrowser({
+  photos : [
+      "../static/img/upload/{{i.ImgPath}}"
+  ]
+  });
+  //点击时打开图片浏览器
+  $$('#{{i.did}}image').on('click', function () {
+  myPhotoBrowserStandalone{{i.did}}.open();
+  });
+</script>
+{% endfor %}
 {% endblock %}
-
-<!-- {% if users.items %}
-{% for user in users.items%}
-  <div data-am-widget="intro"
-       class="am-intro am-cf am-intro-default"
-      style="margin: 5px;margin-top: 8px;border:5px;" >
-
-    <div class="am-g am-intro-bd" style="background-color: rgba(250,250,250,200);">
-        <div
-            class="am-intro-left am-u-sm-5"><img src="../../static/img/{{user.ImgPath}}.thumbnail" /></div>
-        <div
-            class="am-intro-right am-u-sm-7">
-
-<p style="color:    #68838B;margin-bottom: 0.2rem;font-size: 1.6rem;"><span class="am-icon-clock-o"></span>&nbsp类型&nbsp{{user.Type}}<br></span><span class="am-icon-clock-o" style="width: 16px;"></span>&nbsp时间&nbsp{{user.Time}}<br><span class="am-icon-map-marker"style="width: 16px;"></span>&nbsp地点&nbsp{{user.Place}}<br>
-    <span class="am-icon-phone" style="width: 16px;"></span>&nbsp联系方式&nbsp{{user.ContactWay}}</p>
-</div></br>
-  <div class="am-article-bd">
-<div class="am-u-sm-9 am-u-sm-offset-1"> <p style="margin:0 0 0.2rem;font-size: 1.6rem;"> {{user.Content}}</br></p>
-<p style="float:right;margin: 0;font-size: 12px;color: rgba(113, 168, 212, 0.91)">{{user.SubTime}}</p>
-</div>
-  </div>
-  </div>
-{% endfor%}
-{% else %}
-<center>
-<div>
-</br>
-<h2><i  class="am-icon-btn am-warning am-icon-warning"></i>无提交记录!</h2>
-</div>
-</center>
-{% endif %}
-<ul class="am-pagination am-pagination-centered">
-{% if users.has_prev %}
-      <li>
-        <a href="/found/{{users.prev_num}}" class="">&laquo</a>
-      </li>
-{% else %}
-      <li class="am-disabled">
-        <a href="/found/{{users.prev_num}}" class="">&laquo</a>
-{% endif %}
-  {% for i in range(((users.total-1)//5+1)) %}
-  {% if i+1==page %}
-  <li class="am-active"><a href="/found/{{i+1}}">{{i+1}}</a></li>
-  {% else %}
-  <li><a href="/found/{{i+1}}">{{i+1}}</a></li>
-  {% endif %}
-  {% endfor %}
-{% if users.has_next %}
-      <li>
-        <a href="/found/{{users.next_num}}" class="">&raquo</a>
-      </li>
-{% else %}
-<li class="am-disabled">
-        <a href="/found/{{users.next_num}}" class="">&raquo</a>
-      </li>
-{% endif %}
-</ul> -->

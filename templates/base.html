@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+{%- block html %}
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Your app title -->
+    <title>失物招领</title>
+    <!-- Path to Framework7 iOS CSS theme styles-->
+    <link rel="stylesheet" href="../static/css//framework7.ios.min.css">
+    <!-- Path to Framework7 iOS related color styles -->
+    <link rel="stylesheet" href="../static/css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../static/css/my-app.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <!-- Path to Framework7 Libraryaa JS-->
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+
+    {%- block head %}
+    <title>{% block title %}{% endblock title %}</title>
+
+    {%- endblock head %}
+  </head>
+  {% block tab -%}{%- endblock tab %}
+
+  <body>
+    <!-- Header -->
+  <!-- Status bar overlay for fullscreen mode-->
+  <div class="statusbar-overlay"></div>
+  <!-- Panels overlay-->
+  <div class="panel-overlay"></div>
+  <div class="views">
+    <div class="view view-main">
+
+        {% block nav %}
+        {% endblock %}
+      <div class="pages navbar-through toolbar-through">
+        <div class="page" data-page="home">
+          {% block search %}
+          {% endblock %}
+
+          <div class="toolbar tabbar tabbar-labels">
+            <div class="toolbar-inner">
+                <a href="/found/" class="tab-link {% if index %}active{% else %}  {% endif %}">
+                    <i class="fa fa-info-circle n-icon"></i>
+                    <span class="tabbar-label">信息中心</span>
+                </a>
+                <a href="/found/form" class="tab-link {% if form %}active{% else %}  {% endif %}">
+                    <i class="fa fa-plus-square-o n-icon"></i>
+                    <span class="tabbar-label">发布信息</span>
+                </a>
+                <a href="/found/me" class="tab-link {% if me %}active{% else %}  {% endif %}">
+                    <i class="fa fa-user n-icon">
+                    </i>
+                    <span class="tabbar-label">我</span>
+                </a>
+            </div>
+        </div>
+          <div class="page-content">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../static/js/my-app.js"></script>
+  {% block script %}
+  {% endblock %}
+  </body>
+
+{%- endblock html %}
+</html>

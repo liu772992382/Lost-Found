@@ -1,124 +1,81 @@
-
-<div class="popup popup-publish">
-  <div class="navbar color-white theme-white no-border">
-      <div class="navbar-inner">
-        <div class="left"><a href="#" class="close-popup">取消</a></div>
-        <div class="center sliding">填写启事</div>
-        <div class="right"></div>
-      </div>
-  </div>
-  <div class="content-block">
-    <form class="list-block" method="post" enctype="multipart/form-data" action="/found/form">
-      <ul>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-briefcase i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">标题</div>
-             <div class="item-input">
-               <input type="text" id="Header" name="Header" placeholder="写下这次启事的标题" required="required" />
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-question-circle i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">方式</div>
-             <div class="item-input">
-               <select id="Type" name="Type">
-                   <option value="寻物">寻物</option>
-                   <option value="招领">招领</option>
-               </select>
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-sun-o i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">类型</div>
-             <div class="item-input">
-               <select id="ThingsType" name="ThingsType">
-                 <option value="0">证/卡</option>
-                 <option value="1" >钱包</option>
-                 <option value="2" >钥匙</option>
-                 <option value="3" >手机</option>
-                 <option value="4">其他</option>
-               </select>
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-clock-o i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">时间</div>
-             <div class="item-input">
-              <input type="text" id="Time" name="Time" required="required" placeholder="丢失或者拾获的时间">
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-map-marker i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">地点</div>
-             <div class="item-input">
-              <input type="text" id="Place" name="Place" required="required" placeholder="丢失或者拾获的地点">
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-phone i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">联系方式</div>
-             <div class="item-input">
-              <input type="text" id="ContactWay" name="ContactWay" required="required" placeholder="写下您的联系方式">
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-media"><i class="fa fa-money i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">网薪</div>
-             <div class="item-input">
-            <input type="text" id="Reward" name="Reward" {% if user_info.type == 'local' %}disabled="disabled" style="cursor:not-allowed !important;" placeholder="不是易班用户不能填写此项"{% else %} placeholder="悬赏或者需要的网薪(选填)"{% endif %}>
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-            <div class="item-media"><i class="fa fa-camera i-blue"></i></div>
-           <div class="item-inner">
-             <div class="item-title label">照片</div>
-             <div class="item-input">
-              <input type="file" id="File" name="form_file">
-             </div>
-           </div>
-         </div>
-        </li>
-        <li>
-          <div class="item-content">
-           <div class="item-inner">
-             <div class="item-input" style="position:relative;">
-              <textarea name="Content" placeholder="写下您对物品的大致描述(选填)"></textarea>
-              <div style="position:absolute;display:inline-block;top:5px;;right:0;font-size:30px;color:#2196f3;"><i class="fa fa-microphone"></i></div>
-             </div>
-           </div>
-         </div>
-        </li>
-      </ul>
-      <input type="submit" class="button button-big button-fill" value="发布" style="background-color: #3a9425;" />
-    </form>
+{% extends "base.html" %}
+{% block nav%}
+<div class="navbar">
+  <div class="navbar-inner">
+    <!-- Now, Left and Center parts reflect page title and page links, let's slide them -->
+    <div class="center sliding">发布信息</div>
   </div>
 </div>
+{% endblock %}
+{% block content %}
+
+<div class="content-block">
+    <div class="content-block-title">请输入物品相关信息</div>
+  <form class="list-block" method="post" enctype="multipart/form-data" action="/found/form">
+    <ul>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-title label">方式</div>
+           <div class="item-input">
+             <select id="Type" name="Type">
+                 <option value="0">寻物</option>
+                 <option value="1">招领</option>
+             </select>
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-input">
+            <input type="text" id="Time" name="Time" required="required" placeholder="丢失或者拾获的时间">
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-input">
+            <input type="text" id="Place" name="Place" required="required" placeholder="丢失或者拾获的地点">
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-input">
+            <input type="text" id="ContactWay" name="ContactWay" required="required" placeholder="写下您的联系方式">
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-title label">照片</div>
+           <div class="item-input">
+            <input type="file" id="File" name="form_file" multiple="">
+           </div>
+         </div>
+       </div>
+      </li>
+      <li>
+        <div class="item-content">
+         <div class="item-inner">
+           <div class="item-input" style="position:relative;">
+            <textarea name="Content" placeholder="写下您对物品的大致描述(选填)"></textarea>
+           </div>
+         </div>
+       </div>
+      </li>
+    </ul>
+    <br/>
+    <input type="submit" class="button button-big button-fill" value="发布" style="background-color: #007aff;" />
+  </form>
+</div>
+
+{% endblock %}

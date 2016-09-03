@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block nav%}
+<div class="navbar">
+  <div class="navbar-inner">
+      <div class="left sliding">
+      <a href="#" class="link back">
+        <i class="icon icon-back"></i>
+        <span>返回</span>
+      </a>
+    </div>
+    <div class="center sliding">我发布的信息</div>
+  </div>
+</div>
+  <!-- <div class="right"></div> -->
+{% endblock %}
+{% block search %}
+<form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+    <div class="searchbar-input">
+      <input type="search" placeholder="内容查找"><a href="#" class="searchbar-clear"></a>
+    </div><a href="#" class="searchbar-cancel">Cancel</a>
+  </form>
+
+  <!-- Search bar overlay -->
+  <div class="searchbar-overlay"></div>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="buttons-row">
+  <!-- 关联到第一个tab, 默认激活 -->
+  <a href="#tab1" class="tab-link active button">招领</a>
+  <!-- 关联到第二个tab -->
+  <a href="#tab2" class="tab-link button">寻物</a>
+</div>
+
+<div class="tabs">
+  <!-- Tab 1, 默认激活 -->
+  <div id="tab1" class="tab active">
+    <div class="content-block">
+      <!-- This block will be displayed if nothing found -->
+      <div class="content-block searchbar-not-found">
+        <div class="content-block-inner">Nothing found</div>
+      </div>
+
+      <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
+
+      <div class="list-block media-list list-block-search searchbar-found">
+        <ul>
+          {% for i in infos %}
+          {% if i.Type == 1 %}
+          <li>
+            <div class="card facebook-card">
+              <div class="card-header">
+                <div class="facebook-avatar"><img  src="{{i.UserImg}}" width="34" height="34" onerror="this.src='../static/img/icon/heart.png'"></div>
+                <div class="facebook-name item-title">{{i.UserNick}}</div>
+                <div class="facebook-date">{{i.SubTime}}</div>
+              </div>
+              <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="item-text">
+                        地点:{{i.Place}}
+                        <br/>
+                        时间:{{i.Time}}
+                        <br/>
+                        联系方式:{{i.ContactWay}}
+                    </p>
+                  <p class="item-text item-title">{{i.Content}}</p>
+                  <a href="#" id="{{i.did}}image">
+                      <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
+
+                  </a>
+                </div>
+              </div>
+              <div class="card-footer"><a onclick="info_delete({{i.did}})"  class="link ">删除</a><a onclick="report({{i.did}})" class="link">举报({{i.Report}})</a></div>
+            </div>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- Tab 2 -->
+  <div id="tab2" class="tab">
+    <div class="content-block">
+      <div class="content-block searchbar-not-found">
+        <div class="content-block-inner">Nothing found</div>
+      </div>
+
+      <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
+
+      <div class="list-block media-list list-block-search searchbar-found">
+        <ul>
+           {% for i in infos %}
+          {% if i.Type == 0%}
+          <li>
+            <div class="card facebook-card">
+              <div class="card-header">
+                <div class="facebook-avatar"><img  src="{{i.UserImg}}" width="34" height="34" onerror="this.src='../static/img/icon/heart.png'"></div>
+                <div class="facebook-name item-title">{{i.UserNick}}</div>
+                <div class="facebook-date">{{i.SubTime}}</div>
+              </div>
+              <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="item-text">
+                        地点:{{i.Place}}
+                        <br/>
+                        时间:{{i.Time}}
+                    </p>
+                  <p class="item-text item-title">{{i.Content}}</p>
+                  <a href="#" id="{{i.did}}image">
+                      <img src="../static/img/upload/{{i.thumbnail}}" alt="" />
+
+                  </a>
+                </div>
+              </div>
+              <div class="card-footer"><a onclick="info_delete({{i.did}})"  class="link">删除</a><a onclick="report({{i.did}})" class="link">举报({{i.Report}})</a></div>
+            </div>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+{% for i in infos %}
+<script type="text/javascript">
+var myPhotoBrowserStandalone{{i.did}} = myApp.photoBrowser({
+  photos : [
+      "../static/img/upload/{{i.ImgPath}}"
+  ]
+  });
+  //点击时打开图片浏览器
+  $$('#{{i.did}}image').on('click', function () {
+  myPhotoBrowserStandalone{{i.did}}.open();
+  });
+</script>
+{% endfor %}
+{% endblock %}
