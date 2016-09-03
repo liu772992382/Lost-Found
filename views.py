@@ -32,7 +32,6 @@ def Thumbnail(f, _type):
         fname=things[int(_type)]
     else:
         fname = hashpw(f.filename.encode('utf-8'))
-	print repr(f.filename)
 	im=Image.open(f)
 	im.thumbnail((160,160),Image.ANTIALIAS)
 	im.save(Config.IMG_FLODER + fname)
@@ -45,11 +44,9 @@ def hashimage(upfile):
 	ha.update(a)
 	c = str(ha.hexdigest()) + fname[fname.rfind('.'):]
 	upfile.save(os.path.join(Config.IMG_FLODER, c))
-	print upfile
 	im = Image.open(Config.IMG_FLODER + c)
 	im.thumbnail((160,160),Image.ANTIALIAS)
 	tname = str(ha.hexdigest()) + '_thumbnail' + fname[fname.rfind('.'):]
-	print im
 	im.save(os.path.join(Config.IMG_FLODER, tname))
 	return c
 
@@ -228,7 +225,6 @@ def myinfo():
 	if request.method == 'GET':
 		infos = db.session.query(UserData).filter_by(UserId = session['userid']).order_by(UserData.SubTime.desc()).all()
 		for i in infos:
-			print 1
 			try:
 				rpos = i.ImgPath.rfind('.')
 				i.thumbnail = i.ImgPath[:rpos] + '_thumbnail' + i.ImgPath[rpos:]
