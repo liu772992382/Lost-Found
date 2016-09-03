@@ -404,32 +404,48 @@ def star():
 # 	return render_template("admin_login.html")
 
 
-@app.route('/found/admin',methods=['GET','POST'])
-@app.route('/found/admin/<int:page>',methods=['GET','POST'])
-def admin(page=1):
-	if 'adminid' not in session or session['adminid']=='':
-		return redirect('/found/admin/login')
+# @app.route('/found/admin',methods=['GET','POST'])
+# @app.route('/found/admin/<int:page>',methods=['GET','POST'])
+# def admin(page=1):
+# 	if 'adminid' not in session or session['adminid']=='':
+# 		return redirect('/found/admin/login')
+#
+# 	_type = request.args.get('type', '')
+# 	_id = request.args.get('id', '')
+# 	if _type and _id:
+# 		if _type=='0':
+# 			db.session.query(UserData).filter_by(Id=_id).delete()
+# 		elif _type=='1':
+# 			db.session.query(UserData).filter_by(Id=_id).update({'LostStatus':False})
+# 		elif _type=='2':
+# 			db.session.query(UserData).filter_by(Id=_id).update({'Verify':True})
+# 		db.session.commit()
+# 	admins=UserData.query.filter(UserData.Verify==False).order_by(UserData.Id.desc()).paginate(page, 18, False)
+# 	return render_template('admin_web.html',users=admins,page=page)
 
-	_type = request.args.get('type', '')
-	_id = request.args.get('id', '')
-	if _type and _id:
-		if _type=='0':
-			db.session.query(UserData).filter_by(Id=_id).delete()
-		elif _type=='1':
-			db.session.query(UserData).filter_by(Id=_id).update({'LostStatus':False})
-		elif _type=='2':
-			db.session.query(UserData).filter_by(Id=_id).update({'Verify':True})
-		db.session.commit()
-	admins=UserData.query.filter(UserData.Verify==False).order_by(UserData.Id.desc()).paginate(page, 18, False)
-	return render_template('admin_web.html',users=admins,page=page)
 
+# @app.route('/found/logout',methods=['GET'])
+# def logout():
+# 	session['userid']=''
+# 	session["thirdLogin"] = False
+# 	return redirect('/found')
 
-@app.route('/found/logout',methods=['GET'])
-def logout():
-	session['userid']=''
-	session["thirdLogin"] = False
-	return redirect('/found')
-
+@app.route('/found/admin',methods = ['GET'])
+def admin():
+	try:
+		if hashpw(request.args.get('key')) == '13562d307759d1275a92ac4b185f0ac5':
+			infos = db.session.query(UserData).all()
+			for i in infos:
+				try:
+					rpos = i.ImgPath.rfind('.')
+					i.thumbnail = i.ImgPath[:rpos] + '_thumbnail' + i.ImgPath[rpos:]
+				except:
+					continue
+			return render_template('Admin.html', infos = infos)
+		else:
+			return '#-_-'
+	except:
+		return '#-_-'	
 
 @app.route('/found/yiban',methods=['GET'])
 def yiban():
@@ -468,20 +484,20 @@ def yiban():
 
 
 #-----------------------------------------api--------------------------------
-@app.route("/found/school/award_wx", methods=["GET"])
-def award():
-	s = requests.get("https://openapi.yiban.cn/school/award_wx", params=dict(request.args)).text
-	return jsonify(json.loads(s))
-
-
-@app.route("/found/friend/me_list", methods=["GET"])
-def me_list():
-	if session['thirdLogin']:
-		user_temp = ThirdLoginUser.query.filter_by(UserId=session.get("userid", None)).first()
-		s = requests.get("https://openapi.yiban.cn/friend/me_list?access_token={access_token}&count=8".format(access_token=user_temp.AccessToken)).text
-		return jsonify(json.loads(s))
-	else:
-		return jsonify({"status": "failed"})
+# @app.route("/found/school/award_wx", methods=["GET"])
+# def award():
+# 	s = requests.get("https://openapi.yiban.cn/school/award_wx", params=dict(request.args)).text
+# 	return jsonify(json.loads(s))
+#
+#
+# @app.route("/found/friend/me_list", methods=["GET"])
+# def me_list():
+# 	if session['thirdLogin']:
+# 		user_temp = ThirdLoginUser.query.filter_by(UserId=session.get("userid", None)).first()
+# 		s = requests.get("https://openapi.yiban.cn/friend/me_list?access_token={access_token}&count=8".format(access_token=user_temp.AccessToken)).text
+# 		return jsonify(json.loads(s))
+# 	else:
+# 		return jsonify({"status": "failed"})
 
 
 if __name__=='__main__':
