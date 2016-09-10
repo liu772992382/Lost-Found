@@ -29,9 +29,9 @@
 
 <div class="buttons-row">
   <!-- 关联到第一个tab, 默认激活 -->
-  <a href="#tab1" class="tab-link active button">招领</a>
+  <a href="#tab1" class="tab-link active button">寻物</a>
   <!-- 关联到第二个tab -->
-  <a href="#tab2" class="tab-link button">寻物</a>
+  <a href="#tab2" class="tab-link button">招领</a>
 </div>
 
 <div class="tabs">
@@ -48,7 +48,7 @@
       <div class="list-block media-list list-block-search searchbar-found">
         <ul>
           {% for i in infos %}
-          {% if i.Type == 1 %}
+          {% if i.Type == 0 %}
           <li>
             <div class="card facebook-card">
               <div class="card-header">
@@ -94,7 +94,7 @@
       <div class="list-block media-list list-block-search searchbar-found">
         <ul>
            {% for i in infos %}
-          {% if i.Type == 0%}
+          {% if i.Type == 1 %}
           <li>
             <div class="card facebook-card">
               <div class="card-header">

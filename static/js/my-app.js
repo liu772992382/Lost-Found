@@ -190,4 +190,4 @@ $$('.infinite-scroll').on('infinite', function () {
     // 更新最后加载的序号
     lastIndex = $$('.list-block li').length;
   }, 1000);
-}); 
+});

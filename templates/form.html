@@ -10,7 +10,10 @@
 {% block content %}
 
 <div class="content-block">
-    <div class="content-block-title">请输入物品相关信息</div>
+  {% if error %}
+  <p style="color:red;">提交失败，请将信息填写完整,并上传正确格式图片!</p>
+  {% endif %}
+  <div class="content-block-title">请输入物品相关信息</div>
   <form class="list-block" method="post" enctype="multipart/form-data" action="/found/form">
     <ul>
       <li>
@@ -30,7 +33,7 @@
         <div class="item-content">
          <div class="item-inner">
            <div class="item-input">
-            <input type="text" id="Time" name="Time" required="required" placeholder="丢失或者拾获的时间">
+            <input type="text" id="Time" name="Time"  placeholder="丢失或者拾获的时间" required="">
            </div>
          </div>
        </div>
@@ -67,7 +70,7 @@
         <div class="item-content">
          <div class="item-inner">
            <div class="item-input" style="position:relative;">
-            <textarea name="Content" placeholder="写下您对物品的大致描述(选填)"></textarea>
+            <textarea name="Content" placeholder="写下您对物品的大致描述" required=""></textarea>
            </div>
          </div>
        </div>
